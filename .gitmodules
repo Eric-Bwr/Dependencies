@@ -1,3 +1,6 @@
 [submodule "Math"]
 	path = Math
 	url = git@github.com:Eric-Bwr/Math.git
+[submodule "Audio"]
+	path = Audio
+	url = git@github.com:Eric-Bwr/Audio.git
