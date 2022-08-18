@@ -6,5 +6,6 @@ add_library(Dependencies ${HEADER_FILES} ${SOURCE_FILES})
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Math")
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Audio")
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/FastNoise")
+target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/OpenGL")
 
 set_target_properties(Dependencies PROPERTIES LINKER_LANGUAGE CXX)
