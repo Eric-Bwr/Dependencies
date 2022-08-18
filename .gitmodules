@@ -1,0 +1,3 @@
+[submodule "Math"]
+	path = Math
+	url = git@github.com:Eric-Bwr/Math.git
