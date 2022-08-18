@@ -11,6 +11,7 @@ target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Math
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Audio")
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/FastNoise")
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/OpenGL")
+target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/UI")
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/GLFW/include")
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/FreeType/include")
 

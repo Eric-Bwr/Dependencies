@@ -7,3 +7,6 @@
 [submodule "OpenGL"]
 	path = OpenGL
 	url = git@github.com:Eric-Bwr/OpenGL.git
+[submodule "UI"]
+	path = UI
+	url = git@github.com:Eric-Bwr/UI.git
