@@ -12,5 +12,6 @@ target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Audi
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/FastNoise")
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/OpenGL")
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/GLFW/include")
+target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/FreeType/include")
 
 set_target_properties(Dependencies PROPERTIES LINKER_LANGUAGE CXX)
