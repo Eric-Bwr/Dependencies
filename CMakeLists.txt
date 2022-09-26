@@ -12,7 +12,20 @@ target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Audi
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/FastNoise")
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/OpenGL")
 target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/UI")
-target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/GLFW/include")
-target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/FreeType/include")
+if(WIN32)
+    target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/FreeType/include")
+    target_include_directories(Dependencies PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/GLFW/include")
+endif()
 
-set_target_properties(Dependencies PROPERTIES LINKER_LANGUAGE CXX)
+function(linkDeps)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Dependencies)
+
+    if(WIN32)
+        target_link_libraries(${PROJECT_NAME} PRIVATE
+                ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/GLFW/libglfw3.a
+                ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/FreeType/freetype.a)
+    else()
+        target_include_directories(${PROJECT_NAME} PRIVATE ${FREETYPE_INCLUDE_DIRS})
+        target_link_libraries(${PROJECT_NAME} PRIVATE glfw Freetype::Freetype)
+    endif()
+endfunction()

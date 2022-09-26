@@ -1,9 +1,7 @@
-add_subdirectory(Dependencies)
+REDO
 
-->add_executable
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
-        Dependencies
-        ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/FreeType/freetype.a
-        ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/GLFW/libglfw3.a
-        -static)
+#To install GLFW on Ubuntu
+#sudo apt-get install libglfw3
+#sudo apt-get install libglfw3-dev
+#sudo apt install xorg-dev
