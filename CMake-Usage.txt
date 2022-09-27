@@ -1,4 +1,15 @@
-REDO
+cmake_minimum_required(VERSION 3.16)
+project()
+
+set(CMAKE_CXX_STANDARD 20)
+
+add_subdirectory(Dependencies)
+
+beforeExec()
+
+add_executable(${PROJECT_NAME})
+
+afterExec()
 
 
 #To install GLFW on Ubuntu
