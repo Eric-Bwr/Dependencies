@@ -29,6 +29,8 @@ function(afterExec)
                 ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/GLFW/libglfw3.a
                 ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/FreeType/freetype.a)
     else()
-        target_link_libraries(${PROJECT_NAME} PRIVATE glfw Freetype::Freetype)
+        target_link_libraries(${PROJECT_NAME} PRIVATE
+                glfw
+                Freetype::Freetype)
     endif()
 endfunction()
