@@ -1,18 +1,23 @@
 cmake_minimum_required(VERSION 3.16)
-project()
-
-set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(Dependencies)
 
-beforeExec()
+
+project()
+
+initDeps()
+
+set(CMAKE_CXX_STANDARD 20)
 
 add_executable(${PROJECT_NAME})
 
 afterExec()
 
 
+
 #To install GLFW on Ubuntu
 #sudo apt-get install libglfw3
 #sudo apt-get install libglfw3-dev
 #sudo apt install xorg-dev
+
+#And call initDeps only once (if you setup multi-project)
