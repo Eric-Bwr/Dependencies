@@ -6,7 +6,6 @@ class Scene;
 
 class SceneManager {
 public:
-    void init();
     void setCurrent(int id);
     void setCurrent(Scene* scene);
     void add(Scene* scene);
