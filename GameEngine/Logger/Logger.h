@@ -17,6 +17,7 @@
 #include <sstream>
 #include <chrono>
 #include <iomanip>
+#include <cstring>
 
 #ifdef WIN32
 #include <windows.h>
