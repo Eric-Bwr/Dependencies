@@ -4,7 +4,7 @@ Vec2d Controller::computeVelocity(double strafe, double forward, double slipperi
     double speed = std::sqrt(strafe * strafe + forward * forward);
     if (speed < 0.01)
         return Vec2d(0.0);
-    speed = slipperiness / std::max(speed, 1.0);
+    speed = slipperiness / std::fmax(speed, 1.0);
 
     strafe = strafe * speed;
     forward = forward * speed;
