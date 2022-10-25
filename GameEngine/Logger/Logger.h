@@ -29,12 +29,16 @@ public:
 #ifdef WIN32
         system("@echo off\nreg add HKEY_CURRENT_USER\\Console /v VirtualTerminalLevel /t REG_DWORD /d 0x00000001 /f");
 #endif
+        logColors[0] = '2';
+        logColors[1] = '3';
+        logColors[2] = '1';
     }
     template<typename T>
     void log(T t) {
         content << t;
         printLog();
         logToFile();
+        content.str("");
     }
     template<typename T, typename... Args>
     void log(T t, Args... args) {
@@ -42,30 +46,14 @@ public:
         log(args...) ;
     }
     void setLogDetails(unsigned int line, const char* name, const char* file, const char* LEVEL, int level){
-        content.str("");
-        content.clear();
         this->level = level;
         auto now = std::chrono::system_clock::now();
         currentTime = std::chrono::system_clock::to_time_t(now);
-        content << "[" << std::put_time(gmtime(&currentTime), "%F %T")
-                << "][L:" << line << " - " << name << " -> " << getFilename((char*)file) << "][" << LEVEL <<  "]: ";
+        strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", gmtime(&currentTime));
+        sprintf(prefix, "[%s][%5s %24s %34s][%5s]: ", timeBuffer, std::to_string(line).data(), name, getFilename((char*)file), LEVEL);
     }
     void printLog(){
-        switch (level) {
-            case 0:
-
-                std::cout << "\033[32m" << content.str() << "\033[0m" << std::endl;
-                break;
-            case 1:
-                std::cout << "\033[33m" << content.str() << "\033[0m" << std::endl;
-                break;
-            case 2:
-                std::cout << "\033[31m" << content.str() << "\033[0m" << std::endl;
-                break;
-            default:
-                std::cout << content.str() << std::endl;
-                break;
-        }
+        std::cout << "\033[3" << logColors[level]  << "m" << prefix << content.str() << "\033[0m" << std::endl;
     }
     void setLogFile(const char* path){
         auto now = std::chrono::system_clock::now();
@@ -83,7 +71,7 @@ public:
 private:
     void logToFile(){
         if(file) {
-            fprintf(file, "%s%s", content.str().data(), "\n");
+            fprintf(file, "%s%s%s", prefix, content.str().data(), "\n");
             fflush(file);
         }
     }
@@ -100,6 +88,9 @@ private:
     FILE* file;
     std::ostringstream content;
     std::time_t currentTime;
+    char prefix[100];
+    char timeBuffer[20];
+    char logColors[3];
     int level = 0;
 };
 
