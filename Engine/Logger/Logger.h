@@ -1,5 +1,7 @@
 #pragma once
 
+#define LOGGING_ENABLED
+
 #ifdef LOGGING_ENABLED
 #define logPath logger.setLogFile
 #define logInfo logger.setLogDetails(__LINE__, __func__, __FILE__, "INFO", 0); logger.log
