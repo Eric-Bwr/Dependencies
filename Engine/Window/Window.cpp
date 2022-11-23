@@ -49,7 +49,7 @@ void Window::hint(int hint, int value) {
     glfwWindowHint(hint, value);
 }
 
-void Window::setMouse(double xpos, double ypos) {
+void Window::setMouse(double xpos, double ypos) const {
     glfwSetCursorPos(window, xpos, ypos);
 }
 
