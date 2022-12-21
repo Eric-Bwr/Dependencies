@@ -60,7 +60,7 @@ void SkyBoxManager::render(Mat4f& view) {
         shader->bind();
         vao.bind();
         glDepthFunc(GL_LEQUAL);
-        skyBox->texture->bind();
+        skyBox->texture.bind();
         auto matrix = view;
         matrix.removeTranslation();
         matrix.rotate(skyBox->skyBoxRotation, skyBox->rotationX, skyBox->rotationY, skyBox->rotationZ);
