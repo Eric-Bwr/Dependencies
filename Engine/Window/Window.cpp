@@ -41,6 +41,12 @@ void Window::setPos(int x, int y) const {
     glfwSetWindowPos(window, x, y);
 }
 
+void Window::setSize(int width, int height) {
+    this->width = width;
+    this->height = height;
+    glfwSetWindowSize(window, width, height);
+}
+
 void Window::center(int xOffset, int yOffset) const {
     glfwSetWindowPos(window, (WindowManager::getVideoMode()->width / 2) - (width / 2) + xOffset, (WindowManager::getVideoMode()->height / 2) - (height / 2) + yOffset);
 }
