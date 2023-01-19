@@ -7,11 +7,13 @@
 #define logInfo logger.setLogDetails(__LINE__, __func__, __FILE__, "INFO", 0); logger.log
 #define logWarn logger.setLogDetails(__LINE__, __func__, __FILE__, "WARN", 1); logger.log
 #define logError logger.setLogDetails(__LINE__, __func__, __FILE__, "ERROR", 2); logger.log
+#define logLevel logger.setLogLevel
 #else
 #define logPath(path)
 #define logInfo
 #define logWarn
 #define logError
+#define logLevel
 #endif
 
 #ifdef LOGGING_ENABLED
@@ -54,8 +56,12 @@ public:
         strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", gmtime(&currentTime));
         sprintf(prefix, "[%s][%5s %24s %34s][%5s]: ", timeBuffer, std::to_string(line).data(), name, getFilename((char*)file), LEVEL);
     }
+    void setLogLevel(int loggingLevel){
+        this->loggingLevel = loggingLevel;
+    }
     void printLog(){
-        std::cout << "\033[3" << logColors[level]  << "m" << prefix << content.str() << "\033[0m" << std::endl;
+        if(level > loggingLevel)
+            std::cout << "\033[3" << logColors[level]  << "m" << prefix << content.str() << "\033[0m" << std::endl;
     }
     void setLogFile(const char* path){
         auto now = std::chrono::system_clock::now();
@@ -93,7 +99,7 @@ private:
     char prefix[100];
     char timeBuffer[20];
     char logColors[3];
-    int level = 0;
+    int level = 0, loggingLevel = 0;
 };
 
 static Logger logger;
