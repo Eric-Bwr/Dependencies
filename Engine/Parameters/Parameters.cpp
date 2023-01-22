@@ -1,22 +1,22 @@
 #include "Parameters.h"
 #include <Logger/Logger.h>
 #include <vector>
+#include <map>
 #include <regex>
+#include <fstream>
 
 static FILE* file;
-static std::unordered_map<std::string, std::string> parameters;
+static std::map<std::string, std::string> parameters;
 
 void Parameters::Load(const char* path) {
-    file = fopen(path, "r");
-    if(file){
-        char* line = nullptr;
-        size_t len = 0;
-        ssize_t read;
-        while ((read = getline(&line, &len, file)) != -1) {
+    std::ifstream input(path);
+    if(input.is_open()){
+        std::string line;
+        while (std::getline(input, line)) {
             std::string key;
             std::string value;
             bool isVal = false;
-            for(int i = 0; i < read; i++){
+            for(int i = 0; i < line.size(); i++){
                 auto c = line[i];
                 if(c == '\r' || c == '\n' || c == '\t')
                     continue;
@@ -31,8 +31,8 @@ void Parameters::Load(const char* path) {
             }
             parameters[key] = value;
         }
+        input.close();
     }
-    fclose(file);
     file = fopen(path, "w");
 }
 
@@ -52,10 +52,6 @@ static std::vector<std::string> splitParameter(const std::string& key){
 
 static void setParameter(const std::string& key, const std::string& value) {
     parameters[key] = value;
-    if (file) {
-        fprintf(file, "%s:%s%s", key.c_str(), value.c_str(), "\n");
-        fflush(file);
-    }
 }
 
 template<>
@@ -184,7 +180,11 @@ void Parameters::Set(const std::string& key, const Vec4d& value){
     setParameter(key, std::to_string(value.x) + " " + std::to_string(value.y) + " " + std::to_string(value.z) + " " + std::to_string(value.w));
 }
 
-Parameters::~Parameters() {
-    if(file)
+void Parameters::Flush() {
+    if(file){
+        for(auto& param : parameters)
+            fprintf(file, "%s:%s%s", param.first.c_str(), param.second.c_str(), "\n");
+        fflush(file);
         fclose(file);
+    }
 }

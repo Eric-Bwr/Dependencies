@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Math/Vector.h>
-#include <unordered_map>
+#include <string>
 
 class Parameters {
 public:
@@ -21,5 +21,5 @@ public:
     static void Set(const std::string& key, const Vec4i& value);
     static void Set(const std::string& key, const Vec4f& value);
     static void Set(const std::string& key, const Vec4d& value);
-    ~Parameters();
+    static void Flush();
 };

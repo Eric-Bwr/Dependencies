@@ -27,7 +27,7 @@ void Mesh::init(const float *vertices, uint64_t verticesSize, bool skeletal, uns
 
 void Mesh::init(const float *vertices, uint64_t verticesSize, const unsigned int *indices, uint64_t indicesSize, bool skeletal, unsigned int drawType, unsigned int drawMode) {
     this->drawType = drawType;
-    this->numIndices = numIndices;
+    this->numIndices = indicesSize;
     vao.init();
     if(!skeletal) {
         numVertices = verticesSize / 14;
