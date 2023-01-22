@@ -16,8 +16,7 @@ void Parameters::Load(const char* path) {
             std::string key;
             std::string value;
             bool isVal = false;
-            for(int i = 0; i < line.size(); i++){
-                auto c = line[i];
+            for(char c : line){
                 if(c == '\r' || c == '\n' || c == '\t')
                     continue;
                 if(c == ':') {
