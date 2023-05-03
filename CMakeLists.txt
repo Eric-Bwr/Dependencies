@@ -15,27 +15,15 @@ function(initDeps)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/UI)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/Network)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/Engine)
-    if(WIN32)
-        include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/FreeType/include)
-        include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/GLFW/include)
-    else()
-        find_package(Freetype REQUIRED)
-        include_directories(${FREETYPE_INCLUDE_DIRS})
-    endif()
+
+    find_package(Freetype REQUIRED)
+    include_directories(${FREETYPE_INCLUDE_DIRS})
 endfunction()
 
 function(afterExec)
     target_link_libraries(${PROJECT_NAME} PRIVATE Dependencies)
-    if(WIN32)
-        target_link_libraries(${PROJECT_NAME} PRIVATE
-                ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/GLFW/libglfw3.a
-                ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/FreeType/freetype.a
-                wsock32
-                ws2_32)
-    else()
-        target_link_libraries(${PROJECT_NAME} PRIVATE
+    target_link_libraries(${PROJECT_NAME} PRIVATE
                 glfw
                 Freetype::Freetype
                 -lpthread)
-    endif()
 endfunction()

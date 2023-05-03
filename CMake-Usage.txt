@@ -15,7 +15,7 @@ afterExec()
 
 
 
-#To install GLFW on Ubuntu
+#To install GLFW
 #sudo apt-get install libglfw3 libglfw3-dev xorg-dev
 
 #And call initDeps only once (if you setup multi-project)
